@@ -35,8 +35,11 @@ export const register = asyncHandler(async (req, res) => {
 
   const user = await User.create({ name, email, password, role: 'user' });
   const token = generateToken(user._id);
+  // determine if the request is secure (handles reverse proxies like Render/Vercel)
+  const reqIsSecure = req.secure || req.headers['x-forwarded-proto'] === 'https';
+  const secureFlag = isProd ? reqIsSecure : false;
 
-  res.cookie('token', token, cookieOptions);
+  res.cookie('token', token, { ...cookieOptions, secure: secureFlag });
   res.status(201).json(sanitizeUser(user));
 });
 
@@ -55,12 +58,16 @@ export const login = asyncHandler(async (req, res) => {
   }
 
   const token = generateToken(user._id);
-  res.cookie('token', token, cookieOptions);
+  const reqIsSecure = req.secure || req.headers['x-forwarded-proto'] === 'https';
+  const secureFlag = isProd ? reqIsSecure : false;
+  res.cookie('token', token, { ...cookieOptions, secure: secureFlag });
   res.json(sanitizeUser(user));
 });
 
 export const logout = asyncHandler(async (req, res) => {
-  res.clearCookie('token', { httpOnly: true, secure: isProd, sameSite: isProd ? 'none' : 'lax' });
+  const reqIsSecure = req.secure || req.headers['x-forwarded-proto'] === 'https';
+  const secureFlag = isProd ? reqIsSecure : false;
+  res.clearCookie('token', { httpOnly: true, secure: secureFlag, sameSite: isProd ? 'none' : 'lax' });
   res.json({ message: 'Logged out successfully' });
 });
 
