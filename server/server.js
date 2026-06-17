@@ -18,7 +18,7 @@ const app = express();
 
 // when behind a proxy (Render, Vercel), trust the first proxy so req.secure and
 // protocol-related headers (x-forwarded-*) reflect the original request
-// app.set('trust proxy', 1);
+app.set('trust proxy', 1);
 
 app.use(
   cors({

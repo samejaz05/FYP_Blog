@@ -37,9 +37,17 @@ export const register = asyncHandler(async (req, res) => {
   const token = generateToken(user._id);
   // determine if the request is secure (handles reverse proxies like Render/Vercel)
   const reqIsSecure = req.secure || req.headers['x-forwarded-proto'] === 'https';
-  const secureFlag = isProd ? reqIsSecure : false;
+  // detect if this is a cross-site request (frontend origin differs from API)
+  const origin = req.get('origin') || '';
+  const requestBase = `${req.protocol}://${req.get('host')}`;
+  const isCrossSite = origin && origin !== requestBase;
 
-  res.cookie('token', token, { ...cookieOptions, secure: secureFlag });
+  // If cross-site or in production, set SameSite=None so the browser will send cookies
+  // across sites. Browsers require Secure when SameSite=None, so ensure secure flag is set.
+  const sameSiteFlag = isCrossSite || isProd ? 'none' : 'lax';
+  const secureFlag = reqIsSecure || isProd;
+
+  res.cookie('token', token, { ...cookieOptions, secure: secureFlag, sameSite: sameSiteFlag });
   res.status(201).json(sanitizeUser(user));
 });
 
@@ -59,15 +67,23 @@ export const login = asyncHandler(async (req, res) => {
 
   const token = generateToken(user._id);
   const reqIsSecure = req.secure || req.headers['x-forwarded-proto'] === 'https';
-  const secureFlag = isProd ? reqIsSecure : false;
-  res.cookie('token', token, { ...cookieOptions, secure: secureFlag });
+  const origin = req.get('origin') || '';
+  const requestBase = `${req.protocol}://${req.get('host')}`;
+  const isCrossSite = origin && origin !== requestBase;
+  const sameSiteFlag = isCrossSite || isProd ? 'none' : 'lax';
+  const secureFlag = reqIsSecure || isProd;
+  res.cookie('token', token, { ...cookieOptions, secure: secureFlag, sameSite: sameSiteFlag });
   res.json(sanitizeUser(user));
 });
 
 export const logout = asyncHandler(async (req, res) => {
   const reqIsSecure = req.secure || req.headers['x-forwarded-proto'] === 'https';
-  const secureFlag = isProd ? reqIsSecure : false;
-  res.clearCookie('token', { httpOnly: true, secure: secureFlag, sameSite: isProd ? 'none' : 'lax' });
+  const origin = req.get('origin') || '';
+  const requestBase = `${req.protocol}://${req.get('host')}`;
+  const isCrossSite = origin && origin !== requestBase;
+  const sameSiteFlag = isCrossSite || isProd ? 'none' : 'lax';
+  const secureFlag = reqIsSecure || isProd;
+  res.clearCookie('token', { httpOnly: true, secure: secureFlag, sameSite: sameSiteFlag });
   res.json({ message: 'Logged out successfully' });
 });
 
