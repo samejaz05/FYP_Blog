@@ -60,6 +60,14 @@ export const blogs = [
         <li>Notice which ideas survive the translation; those are worth keeping.</li>
       </ul>
       <p>You don't need to abandon your laptop. Use handwriting as a filter, not a replacement. The screen is for shaping; the page is for discovering.</p>
+      <h3>How to integrate handwriting into modern workflows</h3>
+      <p>Set a short window each morning for handwritten notes, then scan or transcribe the most promising lines into a digital inbox. Tools like phone cameras or simple scanning apps make this low-friction. Over time you'll build a living archive of half-formed ideas that can be reworked without the pressure to publish.</p>
+      <h3>Examples from practice</h3>
+      <p>I once rescued a paragraph that had lived unnoticed in a notebook for months; after polishing it became the lede for a widely-shared essay. The notebook acted as a reservoir — not every fragment turns into something, but the ones that do are often far better than first drafts typed under deadline.</p>
+      <p>In short: treat handwriting as a deliberate constraint that generates material for your digital work, rather than as an old-fashioned alternative.</p>
+      <h3>Extended thoughts</h3>
+      <p>Over time, the habit of collecting fragments will change how you think about projects. You begin to notice patterns: recurring images, metaphors, or questions that hint at larger essays. Those patterns are the seeds of sustained work.</p>
+      <p>Don't worry if most entries never leave the notebook. The value is in the accumulation — a supply of attention-shaped material you can refine when the time is right.</p>
     `,
   },
   {
@@ -76,6 +84,13 @@ export const blogs = [
       <h2>Lower the barrier</h2>
       <p>Keep one book on your nightstand, one in your bag, one on the kitchen counter. Visibility beats willpower. A book you can't see is a book you won't read.</p>
       <p>Start with ten pages. Most nights you'll read more. Some nights you won't. Both outcomes are fine.</p>
+      <h3>Make reading social</h3>
+      <p>Share short notes about what you read with a friend or in a small group. A quick message about a favorite paragraph gives the practice social reinforcement and creates reasons to read that extend beyond personal discipline.</p>
+      <h3>Choose books that invite re-reading</h3>
+      <p>Read books that reward slow attention — essays, short novels, or books with strong thematic coherence. These provide more mileage for the time invested and make habits feel more rewarding.</p>
+      <h3>Extended thoughts</h3>
+      <p>Consider keeping a short reading log: a sentence about why a passage mattered and one follow-up question. Over months this log becomes a map of your intellectual curiosity and will help you choose future reading with more intention.</p>
+      <p>Remember: consistency outperforms intensity. A little reading every day compounds into a substantial body of thought.</p>
     `,
   },
   {
@@ -97,6 +112,17 @@ export const blogs = [
         <li>Can I hire or collaborate with someone who already knows it?</li>
       </ol>
       <p>Boring technology lets you stay in problem-solving mode. For a side project, that's the only mode that matters.</p>
+      <h3>When to introduce new tools</h3>
+      <p>Introduce a new technology when the expected long-term savings outweigh the upfront cost, or when the project genuinely requires capabilities your current stack cannot provide. Test new tools in small, isolated spikes rather than rewriting large sections of your codebase.</p>
+      <h3>Practical checklist</h3>
+      <ul>
+        <li>Prototype quickly to validate value.</li>
+        <li>Keep the integration surface small.</li>
+        <li>Document decisions so you (or future collaborators) understand why the change was made.</li>
+      </ul>
+      <h3>Extended thoughts</h3>
+      <p>Technical choices have social costs: ramp-up time, hiring friction, and maintenance overhead. If your goal is learning rather than shipping, accept those costs consciously. Otherwise, prioritize stability and developer familiarity.</p>
+      <p>When you do introduce a new tool, treat it like a feature: give it acceptance criteria, tests, and a rollback plan.</p>
     `,
   },
   {
@@ -113,6 +139,13 @@ export const blogs = [
       <h2>Errors should teach</h2>
       <p>Return messages that explain what went wrong and how to fix it. "Validation failed: email is required" beats "400 Bad Request" every time.</p>
       <p>Good API design is empathy encoded in HTTP status codes. Your future self — debugging at 2 a.m. — will thank you.</p>
+      <h3>Versioning and deprecation</h3>
+      <p>Plan for change. Adopt a clear versioning strategy and communicate deprecations early. Provide migration guides and maintain compatibility layers when practical so clients are not surprised.</p>
+      <h3>Developer ergonomics</h3>
+      <p>Provide examples, a small SDK, or a Postman collection. These artifacts lower the bar for integration and make your API feel polished and approachable.</p>
+      <h3>Extended thoughts</h3>
+      <p>APIs live in an ecosystem of clients. Make it easy for others to run quick experiments against your endpoints and reward contributions by keeping documentation in the same repo as code. Integration is social engineering as much as technical work.</p>
+      <p>Good telemetry and clear error messages reduce support load and make deprecation less painful.</p>
     `,
   },
   {
@@ -130,6 +163,13 @@ export const blogs = [
       <p>The Jerónimos Monastery facade is best in late afternoon sidelight. Walk the riverfront toward the Discoveries Monument. Golden hour here reflects off the Tagus like liquid amber.</p>
       <blockquote><p>Travel photography isn't about capturing everything. It's about capturing the feeling of being there.</p></blockquote>
       <p>Pack light. One body, one prime lens. Lisbon's hills will remind you why.</p>
+      <h3>Practical shooting tips</h3>
+      <p>Bring a small reflector or a portable diffuser for portraits in narrow alleys. Use a wide aperture for subject isolation and keep ISO low for cleaner highlights. Scout locations in the morning to find compositions that avoid midday crowds.</p>
+      <h3>Where to eat and rest</h3>
+      <p>Look for small tasca-style restaurants away from the main square for fresher food and friendlier prices. Sit with a pastel de nata and an espresso, watch the street life, and let the city provide the rhythm for your day.</p>
+      <h3>Extended thoughts</h3>
+      <p>Travel photography rewards patience. Spend an hour in a single square and notice how light and people change; the cumulative frames will give you a richer narrative than a scattershot approach. Edit ruthlessly — the best travel sets are often small.</p>
+      <p>Respect local rhythms; slowing down will reveal portraits and moments you can't find from a checklist.</p>
     `,
   },
   {
@@ -150,6 +190,18 @@ export const blogs = [
         <li>Full-size toiletries in the age of travel minis.</li>
       </ul>
       <p>Freedom isn't having everything you might need. It's needing only what you have.</p>
+      <h3>Packing checklist</h3>
+      <ul>
+        <li>One versatile jacket</li>
+        <li>Two pairs of pants/skirts</li>
+        <li>Three tops that mix and match</li>
+        <li>Lightweight towel and travel soap</li>
+        <li>Compact power adapter and cable organizer</li>
+      </ul>
+      <p>Before you zip your bag, lay everything out and ask if each item can do double duty. If not, consider leaving it behind. The fewer items you carry, the more options you have for spontaneous movement.</p>
+      <h3>Extended thoughts</h3>
+      <p>Packing small trains you mind to prioritize experiences over objects. When you travel light, you spend less time managing gear and more time noticing place. That shift in attention often becomes the lasting memory of a trip.</p>
+      <p>If you're nervous, practice a two-day trip with the same bag — you'll quickly learn what you truly need.</p>
     `,
   },
   {
@@ -166,6 +218,13 @@ export const blogs = [
       <h2>The overlooked middle</h2>
       <p>Don't skip mid-career works in favor of debuts and masterpieces. <strong>The Evening and the Morning</strong> isn't Follett's best-known book, but it's where I learned how research can breathe without showing off.</p>
       <p>Make your own list. Argue with mine. That's the point.</p>
+      <h3>How to read these books</h3>
+      <p>Approach them with a notebook. Record passages that surprise you and questions that form as you read. Revisit those notes after a few weeks — seeing what stuck helps you discover how a book changed your thinking.</p>
+      <h3>Further reading</h3>
+      <p>If you liked any of these, try pairing them with essays by contemporary critics to see how the conversation around the book has evolved. Libraries and university syllabi are great sources for curated companion reading lists.</p>
+      <h3>Extended thoughts</h3>
+      <p>Reading deeply changes slowly. Revisit a book after a year and you'll notice different passages rising to the surface. Keep track of those shifts — they're clues to how your taste and thinking mature.</p>
+      <p>Share reading notes with friends; conversations often illuminate blind spots in your interpretation.</p>
     `,
   },
   {
@@ -182,6 +241,13 @@ export const blogs = [
       <p>Riverside now hosts job-search clinics, ESL conversation groups, and a seed library for urban gardeners. Circulation of physical books is steady; digital lending is up forty percent.</p>
       <blockquote><p>People don't come only for information. They come to be around other people who value it.</p></blockquote>
       <p>Support your local branch. Use it. The metrics that keep the lights on start with foot traffic.</p>
+      <h3>Funding and community partnerships</h3>
+      <p>Dr. Marsh emphasized diverse funding sources: municipal budgets, small grants, and partnerships with local nonprofits. Libraries that cultivate relationships with schools and community centers tend to have more resilient programs.</p>
+      <h3>Getting involved</h3>
+      <p>Volunteer, donate gently-used books, or propose a program. Small contributions of time or materials can unlock new offerings for a neighborhood, and libraries often welcome community-driven ideas.</p>
+      <h3>Extended thoughts</h3>
+      <p>Libraries are resilient when they become hubs for other community services — literacy programs, job training, maker spaces. Think about programming that bridges generations and skills; those interconnections are what keep libraries relevant.</p>
+      <p>When you support a library, you support the civic scaffolding that makes other community projects possible.</p>
     `,
   },
   {
@@ -200,6 +266,90 @@ export const blogs = [
         <li>CSRF considerations with SameSite policies</li>
       </ul>
       <p>More to come...</p>
+    `,
+  },
+  {
+    authorEmail: 'elena@seed.ink-echo.app',
+    title: 'On Keeping a Little Notebook: Tiny Practices, Big Payoffs',
+    category: 'Writing',
+    tags: ['writing', 'notebook', 'practice'],
+    status: 'published',
+    coverImage: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&h=630&fit=crop',
+    content: `
+      <p>I keep a small notebook in the back pocket of my jeans. It is unassuming and collapses into itself after a few days of use; the pages soften and the spine forgets its original angle. This humble object has altered how I notice details.</p>
+      <h2>Three short rules</h2>
+      <ol>
+        <li>Write one sentence about something you saw today.</li>
+        <li>If an idea wants a second sentence, give it one immediately.</li>
+        <li>Every Sunday, transfer one item into your digital drafts.</li>
+      </ol>
+      <p>These rules keep the practice light but generative. The notebook is not a repository of finished thoughts; it is a place to store the raw material of attention. Over months, these fragments accrete into themes — obsessions you didn't know you had.</p>
+      <h3>Why the smallness matters</h3>
+      <p>Large tools invite formality. A blank doc with a title creates pressure. A pocket notebook invites failure and curiosity. The cost of a bad sentence is tiny, and the permission to fail freely leads to surprising generosity in what you try.</p>
+      <p>Try it for a month: one sentence a day. At the end, you'll have thirty openings; a generous set of starts beats perfection every time.</p>
+    `,
+  },
+  {
+    authorEmail: 'amara@seed.ink-echo.app',
+    title: 'The Slow Web: How to Make the Internet a Little Kinder to Attention',
+    category: 'Culture',
+    tags: ['web', 'attention', 'design'],
+    status: 'published',
+    coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&h=630&fit=crop',
+    content: `
+      <p>The phrase "slow web" is a provocation rather than a manifesto: what if we designed interfaces that encouraged patience, depth, and context instead of velocity and churn?</p>
+      <h2>Principles for kinder interfaces</h2>
+      <ul>
+        <li>Prefer permanence over ephemera — make it easy to save and return.</li>
+        <li>Design for resumption, not interruption — help users pick up where they left off.</li>
+        <li>Limit the frictionless amplification of outrage — give time and context before sharing.</li>
+      </ul>
+      <p>Practically, this can look like fewer push notifications, better bookmarking tools, and interfaces that summarize long conversations rather than making every reply a tiny event. The slow web is not about slowness for its own sake; it's about building spaces that sustain attention.</p>
+      <h3>Case study: a reading list</h3>
+      <p>On one site I use, saved articles appear in a single list with a reading-estimate label and a "pick up where you left off" marker. I read more and feel less compelled to skim everything. Small design choices like these change behavior across time.</p>
+      <p>We cannot rewire the entire internet overnight. But we can choose, project by project, to reward depth. Start by asking: what does mastery look like in this interface? Then design for it.</p>
+    `,
+  },
+  {
+    authorEmail: 'marcus@seed.ink-echo.app',
+    title: 'A Practical Guide to Revision: How to Make Anything Better',
+    category: 'Writing',
+    tags: ['revision', 'editing', 'craft'],
+    status: 'published',
+    coverImage: 'https://images.unsplash.com/photo-1483794344563-d27a8d38bc8b?w=1200&h=630&fit=crop',
+    content: `
+      <p>Revision is where most work actually happens. The first draft is an excavation; the second draft is architecture. If you're impatient for results, learn to love the slow accretion of improvements.</p>
+      <h2>Five revision passes</h2>
+      <ol>
+        <li>Structure: are the sections in the best order?</li>
+        <li>Argument: does each paragraph contribute to the central claim?</li>
+        <li>Clarity: replace jargon and long sentences.</li>
+        <li>Rhythm: vary sentence length for flow.</li>
+        <li>Micro-edit: tighten verbs and trim excess words.</li>
+      </ol>
+      <p>Work through these passes separately. Trying to do them all at once will only flatten the gains. By isolating goals you can measure progress: after the Structure pass you should be able to sketch the piece from memory and know which parts still wobble.</p>
+      <h3>Techniques that help</h3>
+      <p>Read the piece aloud, print it on paper, and give yourself a day before each pass. When in doubt, delete: removal is often more revealing than addition. Finally, recruit a reader for a single question — do they understand the point in the first two paragraphs?</p>
+      <p>Revision is less glamorous than invention, but it's the craft that turns good ideas into work that lasts.</p>
+    `,
+  },
+  {
+    authorEmail: 'james@seed.ink-echo.app',
+    title: 'On Community Reading Groups: How Small Gatherings Scale Curiosity',
+    category: 'Culture',
+    tags: ['reading', 'community', 'books'],
+    status: 'published',
+    coverImage: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1200&h=630&fit=crop',
+    content: `
+      <p>Reading groups are one of the most underrated forms of civic infrastructure. A handful of curious people meeting monthly can sustain attention, generate recommendations, and create accountability for reading ambitions.</p>
+      <h2>Tips for small, durable groups</h2>
+      <ul>
+        <li>Limit size to 8-10 people to preserve conversation depth.</li>
+        <li>Rotate facilitation so no one person bears all the work.</li>
+        <li>Mix formats: sometimes discuss a chapter, sometimes an essay, sometimes a theme.</li>
+      </ul>
+      <p>The social rhythm of a reading group creates permission to read slowly. Members borrow recommendations, but they also push one another into unfamiliar territory. The social cost of not finishing one month’s book is lower than the private shame of abandoning a solitary reading project — and that friction turns into sustained experimentation.</p>
+      <p>Start small. Invite three earnest readers and set a single rule: show up having read a passage you want to talk about. The rest grows from there.</p>
     `,
   },
 ];

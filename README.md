@@ -398,6 +398,140 @@ Auth uses **httpOnly cookies** named `token`, not localStorage.
 | Session check | `GET /api/auth/me` on app load (`AuthContext`) |
 | Logout | `POST /api/auth/logout` clears cookie; 401 responses dispatch `auth:logout` |
 
+**Detailed File Reference**
+
+- **Root files**:
+  - [README.md](README.md): This file — project overview, setup, and instructions.
+  - [client/package.json](client/package.json): Frontend dependencies, scripts (`dev`, `build`, `preview`, `lint`).
+  - [server/package.json](server/package.json): Backend dependencies and scripts (`dev`, `start`, `seed`, `make-admin`).
+
+- **Client (frontend)** — key files and purpose:
+  - [client/index.html](client/index.html): Vite HTML shell; root element where React mounts.
+  - [client/vite.config.js](client/vite.config.js): Vite configuration and dev proxy forwarding `/api` to the server.
+  - [client/.env.example](client/.env.example): Example environment variables for the frontend (e.g. `VITE_API_URL`).
+  - [client/src/main.jsx](client/src/main.jsx): App entry — sets up `AuthProvider`, `Router`, and global providers like Toaster.
+  - [client/src/App.jsx](client/src/App.jsx): Route declarations and high-level layouts.
+  - [client/src/index.css](client/src/index.css): Tailwind tokens and global CSS utilities.
+  - [client/src/api/axios.js](client/src/api/axios.js): Axios base client configured with `withCredentials`, base URL, and common interceptors (401 handling).
+  - [client/src/api/*.js](client/src/api/): Small wrappers for REST resources: `auth.js`, `users.js`, `blogs.js`, `comments.js`, `admin.js` — these expose request functions used by components.
+  - [client/src/context/AuthContext.jsx](client/src/context/AuthContext.jsx): Central auth state: loads current user (`/api/auth/me`), stores user, and exposes login/logout helpers.
+  - [client/src/hooks/useAuth.js](client/src/hooks/useAuth.js): Convenience hook that returns `AuthContext` values.
+  - [client/src/components/editor/TiptapEditor.jsx](client/src/components/editor/TiptapEditor.jsx): Rich editor component using Tiptap — handles content editing, serialization to HTML for storage.
+  - [client/src/pages/Write.jsx](client/src/pages/Write.jsx): Compose/edit page that uses the editor, handles cover uploads, tags, category, and publish/draft actions via `blogs` API wrapper.
+  - [client/src/components/blog/PostCard.jsx](client/src/components/blog/PostCard.jsx): Reusable UI for post previews on feeds and lists.
+  - [client/src/routes/PrivateRoute.jsx](client/src/routes/PrivateRoute.jsx): Route guard that redirects unauthenticated users to login.
+
+- **Server (backend)** — key files and purpose:
+  - [server/server.js](server/server.js): Express app entry — loads middleware (JSON parsing, cookie parser), mounts routers, error handler, and starts the HTTP server.
+  - [server/config/db.js](server/config/db.js): Mongoose connection logic; exports a `connectDB()` function used on server start.
+  - [server/models/User.js](server/models/User.js): Mongoose `User` schema and model: name, email, password (hashed), role, avatar, bio, followers, likes, bookmarks.
+  - [server/models/Blog.js](server/models/Blog.js): `Blog` schema: author ref, title, content (HTML), tags, category, status, coverImage, readCount, likes, bookmarks, createdAt.
+  - [server/models/Comment.js](server/models/Comment.js): Threaded comments: `parent` ref optional, `blog` ref, `author`, `content` and `children` or replies handling.
+  - [server/controllers/authController.js](server/controllers/authController.js): Login, signup, logout, `me` endpoint; creates JWT cookie using `generateToken` util.
+  - [server/controllers/blogController.js](server/controllers/blogController.js): CRUD for blogs, publish/unpublish, list/filter, and authorship checks.
+  - [server/controllers/commentController.js](server/controllers/commentController.js): Create, reply, and delete comment handlers with permission checks.
+  - [server/controllers/userController.js](server/controllers/userController.js): Profile updates, follow/unfollow endpoints, and public profile fetching.
+  - [server/controllers/uploadController.js](server/controllers/uploadController.js): Receives file uploads and forwards to Cloudinary via `utils/cloudinary.js`.
+  - [server/routes/*.js](server/routes/): Express routers mapping endpoints to controller methods (e.g. `authRoutes.js` mounts `/api/auth`).
+  - [server/middleware/authMiddleware.js](server/middleware/authMiddleware.js): `protect` middleware that validates the JWT cookie and injects `req.user`; `optionalAuth` lets requests proceed unauthenticated.
+  - [server/middleware/errorMiddleware.js](server/middleware/errorMiddleware.js): Centralized error handler that formats errors to JSON and sets status codes.
+  - [server/utils/generateToken.js](server/utils/generateToken.js): Signs JWTs for sessions and returns cookie configuration.
+  - [server/utils/cloudinary.js](server/utils/cloudinary.js): Cloudinary SDK wrapper to upload images; reads keys from env.
+  - [server/seed/seed.js](server/seed/seed.js): Script run by `npm run seed` to drop and insert demo users/posts/follows/likes/bookmarks/comments defined in `seedData.js`.
+  - [server/seed/seedData.js](server/seed/seedData.js): Data constants used in the seeder: `adminUser`, `users`, `blogs`, `followGraph`, `likes`, `bookmarks`, `SEED_PASSWORD`, and `SEED_EMAIL_DOMAIN`.
+
+**How the pieces work together**
+
+- Frontend (React + Vite): React components call the API via `client/src/api/*` wrappers which use `axios` configured in `client/src/api/axios.js`. In development, Vite proxies `/api` to the Express server so cookies are sent on same-origin requests.
+- Backend (Express + Mongoose): Express receives requests, middleware validates auth cookie (JWT), controllers run business logic using Mongoose models and utils (Cloudinary, token generation). Responses are JSON consumed by the frontend.
+- Authentication: JWTs are issued on login and set as an `httpOnly` cookie named `token`. The frontend never reads the JWT directly; it relies on the `AuthContext` which calls `GET /api/auth/me` to hydrate the current user.
+
+**Tech Stack and Why**
+
+- **React (Vite)**: Fast dev server, minimal config, modern JSX tooling. Chosen for developer experience and familiarity.
+- **Express**: Lightweight routing and middleware model; good fit for a REST API that serves JSON and handles auth.
+- **MongoDB + Mongoose**: Document model maps naturally to posts, comments, and user profiles. Easier seeding and flexible schemas for drafts/metadata.
+- **Tiptap**: Provides an extendable rich-text editor that outputs HTML, stored directly in the `Blog.content` field.
+- **Cloudinary**: Optional hosted image uploads with URL transformation; decouples media from app storage concerns.
+- **Axios**: Promise-based HTTP client with `withCredentials` for cookie auth and interceptors for central error handling.
+
+**How it was made (development notes)**
+
+- Incrementally: backend API first (models → controllers → routes), then frontend scaffolding with Vite and React pages wired to API wrappers.
+- Focus on UX: Tiptap editor for a pleasant writing experience; mobile-first responsive components.
+- Seed data: created realistic demo content to speed local testing and to exercise features like follows/likes/bookmarks/comments.
+
+**Start the project (quick commands)**
+
+- Install dependencies (run once per app):
+
+```bash
+cd server
+npm install
+cd ../client
+npm install
+```
+
+- Configure env files:
+
+```bash
+cd server
+cp .env.example .env
+# set MONGODB_URI and JWT_SECRET and CLOUDINARY_* if using uploads
+cd ../client
+cp .env.example .env
+# leave VITE_API_URL empty for dev to use Vite proxy
+```
+
+- Seed demo data (optional):
+
+```bash
+cd server
+npm run seed
+```
+
+- Run both apps in development (two terminals):
+
+```bash
+cd server
+npm run dev
+
+cd client
+npm run dev
+```
+
+Open `http://localhost:5173` for the frontend. The API listens on `http://localhost:3000`.
+
+**Seed credentials**
+
+- All seed accounts use password: `Password123!`.
+- Admin: `admin@ink-echo.app` (role: admin)
+- Example users: `elena@seed.ink-echo.app`, `marcus@seed.ink-echo.app`, `amara@seed.ink-echo.app`, `james@seed.ink-echo.app`.
+
+**Testing and linting**
+
+- Client: `npm run lint` (if configured) and `npm run build` to produce `client/dist/`.
+- Server: unit tests not included by default; use Postman or curl to exercise endpoints.
+
+**Production notes**
+
+- Set `NODE_ENV=production` and ensure `CLIENT_URL` matches your frontend origin. Use HTTPS so cookie `secure` flag can be set.
+- Build the client: `cd client && npm run build`, then serve `client/dist/` from a static host or via the server if you prefer.
+
+**Troubleshooting**
+
+- CORS / cookies: In dev the Vite proxy avoids CORS; in prod set `CLIENT_URL` and ensure cookies are sent with proper `SameSite` and `secure` flags.
+- MongoDB connection issues: double-check `MONGODB_URI` and confirm MongoDB is running or Atlas URI is correct.
+- Cloudinary uploads failing: confirm `CLOUDINARY_*` env vars in `server/.env`.
+
+---
+
+If you'd like, I can also:
+- Expand line-level links to point at specific code ranges for major files.
+- Generate a short `CONTRIBUTING.md` with code style and run/test guidance.
+
+Next step: mark the remaining todo items complete and optionally run linters/tests.
+
 Protected UI routes wrap content in `PrivateRoute`, which redirects guests to `/login` and preserves `location` for a return redirect after login.
 
 ---
